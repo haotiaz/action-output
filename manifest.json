@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "action-output",
+  "description": "",
+  "version": "1.0",
+  "browser_action": {},
+  "permissions": [
+    "tabs"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ]
+}
