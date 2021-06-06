@@ -1,7 +1,31 @@
 var index=1;
 let scrapeText = document.getElementById("scrapeText");
 let scrapeURL = document.getElementById("scrapeURL");
+let scrapeLink = document.getElementById("scrapeLink");
 let outputTable = document.getElementById("output");
+var selecting=false;
+
+function waitForSelecting(){
+    selecting=true;
+    let buttons=document.getElementsByTagName('button');
+    var i;
+    for (i = 0; i < buttons.length; i++) {
+        buttons[i].disabled=true;
+    }
+    let reminder = document.getElementById('reminder');
+    reminder.style.visibility="visible";
+}
+
+function finishSelecting() {
+    selecting = false;
+    let buttons = document.getElementsByTagName('button');
+    var i;
+    for (i = 0; i < buttons.length; i++) {
+        buttons[i].disabled = false;
+    }
+    let reminder = document.getElementById('reminder');
+    reminder.style.visibility = "hidden";
+}
 
 function addOutput(output){
     var row = outputTable.insertRow(index);
@@ -18,18 +42,38 @@ function addOutput(output){
 }
 
 function clickURL() {
-    chrome.runtime.sendMessage('scrape-url', (response) => {
+    chrome.runtime.sendMessage({'action': 'scrape-url'}, (response) => {
         addOutput(response);
     });
 }
 
 function clickText() {
-    chrome.runtime.sendMessage('scrape-text', (response) => {
-        addOutput(response);
+    chrome.runtime.sendMessage({ 'action': 'scrape-text'}, (response) => {
+        //meaningless response
     });
+    waitForSelecting();
 }
+
+function clickLink(){
+    chrome.runtime.sendMessage({ 'action': 'scrape-link' }, (response) => {
+        //meaningless response
+    });
+    waitForSelecting();
+}
+
 
 scrapeURL.addEventListener("click", clickURL);
 scrapeText.addEventListener("click", clickText);
+scrapeLink.addEventListener('click', clickLink);
+
+chrome.runtime.onMessage.addListener(
+    function (request, sender, sendResponse) {
+        if (request.action === "output") {
+            addOutput(request.output);
+            finishSelecting();
+        }
+
+    }
+);
 
 

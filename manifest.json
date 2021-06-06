@@ -5,7 +5,8 @@
   "version": "1.0",
   "browser_action": {},
   "permissions": [
-    "tabs"
+    "tabs",
+    "activeTab"
   ],
   "background": {
     "scripts": [

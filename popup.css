@@ -1,0 +1,11 @@
+#reminder{
+    visibility: hidden;
+}
+
+.container{
+    margin-top: 10px;
+}
+
+.btn{
+    margin-right: 2px;
+}

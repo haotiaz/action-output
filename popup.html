@@ -3,19 +3,30 @@
   <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="popup.css">
   </head>
   <body>
-    <div>
-      <button id="scrapeText" class="btn btn-primary">Scrape text</button>
-      <button id="scrapeURL" class="btn btn-primary">Scrape URL</button>
+    <div class="container">
+        <div class="row">
+          <button id="scrapeText" class="btn btn-primary">Scrape text</button>
+          <button id="scrapeURL" class="btn btn-primary">Scrape URL</button>
+          <button id="scrapeLink" class="btn btn-primary">Scrape link</button>
+          <button id="download" class="btn btn-primary">Download</button>
+        </div>
+        <div class="row">
+          <span id="reminder">Select an element on the web page</span>
+        </div>
+        <div class="row">
+          <table id="output" class="table">
+            <thead>
+              <tr>
+                <th scope="col" style="width: 10%">#</th>
+                <th scope="col" style="width: 90%">Output</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
     </div>
-    
-    <table id="output">
-      <tr>
-        <th>index</th>
-        <th>output</th>
-      </tr>
-    </table>
     <script src="popup.js"></script>
   </body>
 </html>
